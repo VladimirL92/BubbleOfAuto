@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 
 public class ScoreCounter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int Score;
 
-    // Update is called once per frame
-    void Update()
+    public TMP_Text ScoreText;
+
+
+
+    public void AddScore( int points)
     {
-        
+        Score += points;
+        ScoreText.text = Score.ToString();
     }
 }

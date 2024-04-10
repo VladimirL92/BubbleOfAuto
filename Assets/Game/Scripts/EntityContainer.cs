@@ -14,6 +14,7 @@ public class EntityContainer : MonoBehaviour
     public List<Sprite> Entities;
     [Header("Game Manager")]
     public PauseMenu GameManager;
+    public ScoreCounter ScoreCounter;
     
     public  GameObject EntityCreate ()
     {
@@ -54,6 +55,7 @@ public class EntityContainer : MonoBehaviour
         entityController.MyCount = index;
         entityController.MySize = size;
         entityController.SpeedScaler = SpeedScaler;
+        entityController.Score = ScoreCounter;
 
         return obj;
     }

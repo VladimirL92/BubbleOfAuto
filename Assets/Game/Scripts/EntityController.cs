@@ -9,6 +9,8 @@ public class EntityController : MonoBehaviour
     public float SpeedScaler;
     public EntityContainer container;
 
+    public ScoreCounter Score;
+
     public float Speed;
     private SpriteRenderer myRenderer;
     private float sizeTemp;
@@ -99,6 +101,7 @@ public class EntityController : MonoBehaviour
         var ent = container.EntityCreate(MyCount + 1, transform.position);
         container.AddPhysics(ent);
         mystate = MyState.Destroed;
+        Score.AddScore(MyCount);
     }
 
     private void SizeSet( float size)
