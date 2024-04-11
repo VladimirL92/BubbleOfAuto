@@ -13,6 +13,10 @@ public class PauseMenu : MonoBehaviour
     public Canvas GameWinCanvas;
 
     public EmiterController Emiter;
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
 
     public void PauseOn()
     {
@@ -29,15 +33,15 @@ public class PauseMenu : MonoBehaviour
     public void ResetGame()
     {
         SceneManager.LoadScene(0);
-        Time.timeScale = 1;
-        Emiter.Pause = false;
     }
 
     public void GameOver()
     {
-        GameOverCanvas.gameObject.SetActive(true);
-        Emiter.Pause = true;
         Time.timeScale = 0;
+        Emiter.Pause = true;
+        GameOverCanvas.gameObject.SetActive(true);
+
+
     }
     public void GameWin()
     {

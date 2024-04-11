@@ -26,6 +26,7 @@ public class EmiterController : MonoBehaviour
         {
             NonPausePlay();
         }
+
     }
     
 
@@ -39,8 +40,13 @@ public class EmiterController : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            Container.AddPhysics(Entity);
-            Entity = Container.EntityCreate();
+            EntityStart();
         }
+    }
+
+    public void EntityStart()
+    {
+        Container.AddPhysics(Entity);
+        Entity = Container.EntityCreate();
     }
 }

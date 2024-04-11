@@ -29,6 +29,11 @@ public class EntityContainer : MonoBehaviour
         return entity;
     }
 
+    public void SpawnEntityWin()
+    {
+
+    }
+
     public GameObject EntityCreate(int indexNew)
     {
         var index = 0;
@@ -38,6 +43,7 @@ public class EntityContainer : MonoBehaviour
         }
         else
         {
+            Debug.Log("Win!!");
             index = Entities.Count - 1;
             GameManager.GameWin();
         }
