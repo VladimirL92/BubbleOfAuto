@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +7,9 @@ public class FPSCounter : MonoBehaviour
 
     private int fpsCounter;
     private float timer;
+    private string tempString;
+
+    private int fPS;
     private void Start()
     {
         Application.targetFrameRate = 60;
@@ -17,9 +18,10 @@ public class FPSCounter : MonoBehaviour
     }
     void Update()
     {
+
         if (timer > 1)
         {
-            Text.text = fpsCounter.ToString();
+            fPS = fpsCounter;
             fpsCounter = 0;
             timer = 0;
         }
@@ -28,5 +30,6 @@ public class FPSCounter : MonoBehaviour
             timer += Time.deltaTime;
             fpsCounter ++;
         }
+
     }
 }

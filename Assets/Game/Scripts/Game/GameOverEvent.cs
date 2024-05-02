@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameOverEvent : MonoBehaviour
@@ -12,9 +9,7 @@ public class GameOverEvent : MonoBehaviour
     public float TimeDetectDead;
 
     public PauseMenu menu;
-
-    public Vector2 PointA;
-    public Vector2 PointB;
+    public float WidhtLineCast;
 
     private void Start()
     {
@@ -24,13 +19,17 @@ public class GameOverEvent : MonoBehaviour
 
     private void Update()
     {
-        if (Physics2D.OverlapArea(PointA, PointB) != null)
+        var a = new Vector2(transform.position.x - (WidhtLineCast / 2), transform.position.y);
+        var b = new Vector2(transform.position.x + (WidhtLineCast / 2), transform.position.y);
+
+        if (Physics2D.Linecast(a,b))
         {
-            Debug.Log("trigger");
+            Debug.Log("deadColision");
             timer += Time.deltaTime;
             if (timer > TimeDetectDead)
             {
                 DeadAction();
+                Debug.Log("dead");
             }
         }
         else
@@ -46,6 +45,8 @@ public class GameOverEvent : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Debug.DrawLine(PointA, PointB);
+        var a = new Vector2(transform.position.x - (WidhtLineCast / 2),transform.position.y);
+        var b = new Vector2(transform.position.x + (WidhtLineCast / 2),transform.position.y);
+        Gizmos.DrawLine(a, b);
     }
 }

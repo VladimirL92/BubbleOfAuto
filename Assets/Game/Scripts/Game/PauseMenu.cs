@@ -1,34 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public Canvas PauseCanvas;
-
-    public Canvas GameOverCanvas;
-
-    public Canvas GameWinCanvas;
-
+    [Header("Dash")]
+    public Transform DashGamePause;
+    public Transform DashGameOver;
+    public Transform DashGameWin;
     public EmiterController Emiter;
+
+    [Header("Setting")]
+    public float DelayWin;
+    public float DelayDead;
+
+    private float TimerWin;
+    private float timerDead;
     private void Start()
     {
         Time.timeScale = 1;
+        TimerWin = 0;
+        timerDead = 0;
     }
-
     public void PauseOn()
     {
         Time.timeScale = 0;
         Emiter.Pause = true;
-        PauseCanvas.gameObject.SetActive(true);
+        DashGamePause.gameObject.SetActive(true);
     }
     public void PauseOff()
     {
         Time.timeScale = 1;
         Emiter.Pause = false;
-        PauseCanvas.gameObject.SetActive(false);
+        DashGamePause.gameObject.SetActive(false);
     }
     public void ResetGame()
     {
@@ -39,15 +42,18 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 0;
         Emiter.Pause = true;
-        GameOverCanvas.gameObject.SetActive(true);
-
-
+        DashGameOver.gameObject.SetActive(true);
+        //Save.SaveMaxScore(1);
     }
     public void GameWin()
     {
-        GameWinCanvas.gameObject.SetActive(true);
+        DashGameWin.gameObject.SetActive(true);
         Emiter.Pause = true;
         Time.timeScale = 0;
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }
