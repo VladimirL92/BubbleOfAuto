@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour , IGameEvent
 {
+    public ScoreManager ScoreManager;
     [Header("Dash")]
     public Transform DashGamePause;
     public Transform DashGameOver;
@@ -13,47 +14,45 @@ public class PauseMenu : MonoBehaviour
     public float DelayWin;
     public float DelayDead;
 
-    private float TimerWin;
-    private float timerDead;
+    [Header("GameTimeScale")]
+    public float GameTimeScale = 1f;
     private void Start()
     {
-        Time.timeScale = 1;
-        TimerWin = 0;
-        timerDead = 0;
+        ScoreManager = GetComponent<ScoreManager>();
+        Time.timeScale = GameTimeScale;
     }
-    public void PauseOn()
+    public void ResetGame()
+    {
+        var scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(scene);
+    }
+        public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Pause()
     {
         Time.timeScale = 0;
         Emiter.Pause = true;
         DashGamePause.gameObject.SetActive(true);
     }
-    public void PauseOff()
+    public void Play()
     {
-        Time.timeScale = 1;
+        Time.timeScale = GameTimeScale;
         Emiter.Pause = false;
         DashGamePause.gameObject.SetActive(false);
     }
-    public void ResetGame()
+    public void Win()
     {
-        SceneManager.LoadScene(0);
+        ScoreManager.SaveScore();
+        DashGameWin.gameObject.SetActive(true);
+        Emiter.Pause = true;
+        Time.timeScale = 0;
     }
-
     public void GameOver()
     {
         Time.timeScale = 0;
         Emiter.Pause = true;
         DashGameOver.gameObject.SetActive(true);
-        //Save.SaveMaxScore(1);
     }
-    public void GameWin()
-    {
-        DashGameWin.gameObject.SetActive(true);
-        Emiter.Pause = true;
-        Time.timeScale = 0;
-    }
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-
 }

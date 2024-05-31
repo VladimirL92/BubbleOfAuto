@@ -3,17 +3,13 @@ using UnityEngine;
 public class GameOverEvent : MonoBehaviour
     
 {
-    private bool collisionEnter;
     public float timer;
-
     public float TimeDetectDead;
-
-    public PauseMenu menu;
+    public GameEvent GameEvent;
     public float WidhtLineCast;
 
     private void Start()
     {
-        collisionEnter = false;
         timer = 0;
     }
 
@@ -40,7 +36,7 @@ public class GameOverEvent : MonoBehaviour
 
     private void DeadAction()
     {
-        menu.GameOver();
+        GameEvent.GameOver();
     }
 
     private void OnDrawGizmos()

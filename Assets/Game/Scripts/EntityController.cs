@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class EntityController : MonoBehaviour
@@ -9,12 +8,10 @@ public class EntityController : MonoBehaviour
     public float SpeedScaler;
     public EntityContainer container;
 
-    public ScoreCounter Score;
+    public ScoreManager Score;
 
     public float Speed;
-    private SpriteRenderer myRenderer;
     private float sizeTemp;
-    private bool imColision = false;
 
     enum MyState
     {
@@ -29,7 +26,6 @@ public class EntityController : MonoBehaviour
     {
         container = transform.parent.GetComponent<EntityContainer>();
         mystate = MyState.Start;
-        myRenderer = GetComponent<SpriteRenderer>();
         sizeTemp = 0;
         SizeSet(0.01f);
 
@@ -54,17 +50,19 @@ public class EntityController : MonoBehaviour
     {
         if ( collision.gameObject.tag == "Entity")
         {
-           if (collision.gameObject.GetComponent<EntityController>().MyCount == MyCount)
+            if (mystate != MyState.Destroed | mystate != MyState.Replacement | mystate != MyState.Start)
             {
-                if ( transform.GetComponent<Rigidbody2D>().velocity.magnitude > collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude)
+                if (collision.gameObject.GetComponent<EntityController>().MyCount == MyCount)
                 {
-                    mystate = MyState.Replacement;
+                    if (transform.GetComponent<Rigidbody2D>().velocity.magnitude > collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude)
+                    {
+                        mystate = MyState.Replacement;
+                    }
+                    else
+                    {
+                        mystate = MyState.Destroed;
+                    }
                 }
-                else
-                {
-                    mystate = MyState.Destroed;
-                }
-                imColision = true;
             }
         }
     }

@@ -1,8 +1,6 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
-public class EmiterController : MonoBehaviour
+public class EmiterController : MonoBehaviour,IGameEvent 
 {
     [HideInInspector]
     public GameObject Entity;
@@ -68,20 +66,37 @@ public class EmiterController : MonoBehaviour
         dif.x = Mathf.Clamp(dif.x, SpaceMouse.xMin,SpaceMouse.xMax);
         transform.position = new Vector2(dif.x, transform.position.y);
     }
+    
+        private void OnDrawGizmos()
+        {
+            var upLeft = new Vector2(SpaceMouse.xMin, SpaceMouse.yMin);
+            var upRight = new Vector2(SpaceMouse.xMax, SpaceMouse.yMin);
+            var downLeft = new Vector2(SpaceMouse.xMin, SpaceMouse.yMax);
+            var downRight = new Vector2(SpaceMouse.xMax, SpaceMouse.yMax);
+            Gizmos.DrawLine(upLeft, upRight);
+            Gizmos.DrawLine(upLeft, downLeft);
+            Gizmos.DrawLine(downLeft, downRight);
+            Gizmos.DrawLine(downRight, upRight);
 
-    private void OnDrawGizmos()
+        }
+
+    void IGameEvent.Pause()
     {
-        var upLeft = new Vector2(SpaceMouse.xMin, SpaceMouse.yMin);
-        var upRight = new Vector2(SpaceMouse.xMax, SpaceMouse.yMin);
-        var downLeft = new Vector2(SpaceMouse.xMin, SpaceMouse.yMax);
-        var downRight = new Vector2(SpaceMouse.xMax, SpaceMouse.yMax);
-        Gizmos.DrawLine(upLeft,upRight);
-        Gizmos.DrawLine(upLeft, downLeft);
-        Gizmos.DrawLine(downLeft,downRight);
-        Gizmos.DrawLine(downRight,upRight);
+        throw new System.NotImplementedException();
+    }
 
-        var mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    public void Play()
+    {
+        throw new System.NotImplementedException();
+    }
 
-        Handles.Label(transform.position,mouse.ToString());
+    public void Win()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void GameOver()
+    {
+        throw new System.NotImplementedException();
     }
 }

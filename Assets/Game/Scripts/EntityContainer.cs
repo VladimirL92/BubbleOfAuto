@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class EntityContainer : MonoBehaviour
+
+public class EntityContainer : MonoBehaviour,IGameEvent
 {
     [Header("Entities Setting")]
     public float SizeSteep;
@@ -12,8 +12,8 @@ public class EntityContainer : MonoBehaviour
     public int maxSpawnRangeEntity = 1;
     public List<Sprite> Entities;
     [Header("Game Manager")]
-    public PauseMenu GameManager;
-    public ScoreCounter ScoreCounter;
+    public GameEvent GameEvent;
+    public ScoreManager ScoreCounter;
     public float DelayWin;
     [Header("Entity_Z")]
     public float Z;
@@ -31,7 +31,7 @@ public class EntityContainer : MonoBehaviour
         {
             if (timerWin > DelayWin)
             {
-                GameManager.GameWin();
+                GameEvent.Win();
             }
             timerWin += Time.deltaTime;
         }
@@ -93,5 +93,25 @@ public class EntityContainer : MonoBehaviour
        var temp =  obj.AddComponent<Rigidbody2D>();
 
         temp.drag = 1;
+    }
+
+    public void Pause()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Play()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Win()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void GameOver()
+    {
+        throw new System.NotImplementedException();
     }
 }

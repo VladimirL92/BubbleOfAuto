@@ -7,7 +7,6 @@ public class FPSCounter : MonoBehaviour
 
     private int fpsCounter;
     private float timer;
-    private string tempString;
 
     private int fPS;
     private void Start()
@@ -18,7 +17,6 @@ public class FPSCounter : MonoBehaviour
     }
     void Update()
     {
-
         if (timer > 1)
         {
             fPS = fpsCounter;
@@ -30,6 +28,5 @@ public class FPSCounter : MonoBehaviour
             timer += Time.deltaTime;
             fpsCounter ++;
         }
-
     }
 }

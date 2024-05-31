@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ClosePanelScript : MonoBehaviour
+public class ClosePanelScript : MonoBehaviour, IPointerClickHandler
 {
-    public PauseMenu GameState;
-    private void OnMouseDown()
+    public GameEvent GameEvent;
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        GameState.PauseOff();
+        GameEvent.Play();
     }
+
 }
