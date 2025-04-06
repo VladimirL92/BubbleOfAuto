@@ -1,12 +1,14 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class ClickLoadScene : MonoBehaviour, IPointerClickHandler
 {
-    public int SceneNum;
+    public int LevelNum;
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadScene(SceneNum);
+        LevelLoader.Lev = LevelNum;
+        SceneManager.LoadScene(1);
     }
 }
